@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using Yarp.ReverseProxy.Configuration;
 
 namespace OpenHabUrlSegment;
@@ -9,7 +10,7 @@ internal class OpenHabProxyConfigProvider : IProxyConfigProvider
 
     private readonly IReadOnlyList<ClusterConfig> _clusters;
 
-    public OpenHabProxyConfigProvider()
+    public OpenHabProxyConfigProvider(IOptions<OpenHabProxyOptions> options)
     {
         _routes = new[] { new RouteConfig { RouteId = "route1", ClusterId = "cluster1", Match = new RouteMatch { Path = "/openhab/{**catch-all}" } } };
 
