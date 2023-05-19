@@ -1,6 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using OpenHabUrlSegment;
+using Yarp.ReverseProxy.Configuration;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddReverseProxy();
+builder.Services.AddSingleton<IProxyConfigProvider, OpenHabProxyConfigProvider>();
+
+var app = builder.Build();
+app.MapReverseProxy();
 
 app.Run();
