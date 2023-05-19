@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHabUrlSegment", "src\OpenHabUrlSegment\OpenHabUrlSegment.csproj", "{2F9A297B-494A-486F-A29A-7C6CE758057D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "tests\Tests\Tests.csproj", "{9AE949D2-8201-4A98-B983-34C0B5C8D27C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,11 @@ Global
 		{2F9A297B-494A-486F-A29A-7C6CE758057D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9A297B-494A-486F-A29A-7C6CE758057D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F9A297B-494A-486F-A29A-7C6CE758057D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE949D2-8201-4A98-B983-34C0B5C8D27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE949D2-8201-4A98-B983-34C0B5C8D27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE949D2-8201-4A98-B983-34C0B5C8D27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE949D2-8201-4A98-B983-34C0B5C8D27C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
