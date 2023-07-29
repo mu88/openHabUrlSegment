@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Primitives;
+﻿using Microsoft.Extensions.Primitives;
 using Yarp.ReverseProxy.Configuration;
 using Yarp.ReverseProxy.Transforms;
 
@@ -11,15 +10,13 @@ internal class OpenHabProxyConfigProvider : IProxyConfigProvider
 
     private readonly IReadOnlyList<ClusterConfig> _clusters;
 
-    public OpenHabProxyConfigProvider(IOptions<OpenHabProxyOptions> options)
+    public OpenHabProxyConfigProvider()
     {
-        var config = options.Value;
-        var openHab = $"{config.OpenHabHost}:{config.OpenHabPort}";
         _routes = new[]
         {
-            new RouteConfig { RouteId = "route1", ClusterId = "cluster1", Match = new RouteMatch { Path = $"{config.UrlPathSegment}/{{**catch-all}}" } }
+            new RouteConfig { RouteId = "route1", ClusterId = "cluster1", Match = new RouteMatch { Path = "openhab/{**catch-all}" } }
                 .WithTransformPathRemovePrefix("/openhab")
-                .WithTransformRequestHeader("Host", $"{openHab}", false)
+                .WithTransformRequestHeader("Host", "localhost:9000")
         };
 
         _clusters = new[]
@@ -27,12 +24,11 @@ internal class OpenHabProxyConfigProvider : IProxyConfigProvider
             new ClusterConfig
             {
                 ClusterId = "cluster1",
-                Destinations = new Dictionary<string, DestinationConfig> { { "destination1", new DestinationConfig { Address = $"http://{openHab}/" } } }
+                Destinations = new Dictionary<string, DestinationConfig> { { "destination1", new DestinationConfig { Address = "http://localhost:9000/" } } }
             }
         };
     }
 
-    /// <inheritdoc />
     public IProxyConfig GetConfig() => new OpenHabProxyConfig(_routes, _clusters);
 
     private class OpenHabProxyConfig : IProxyConfig
@@ -46,13 +42,10 @@ internal class OpenHabProxyConfigProvider : IProxyConfigProvider
             ChangeToken = new CancellationChangeToken(_cts.Token);
         }
 
-        /// <inheritdoc />
         public IReadOnlyList<RouteConfig> Routes { get; }
 
-        /// <inheritdoc />
         public IReadOnlyList<ClusterConfig> Clusters { get; }
 
-        /// <inheritdoc />
         public IChangeToken ChangeToken { get; }
     }
 }

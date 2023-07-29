@@ -1,0 +1,7 @@
+version: "3"
+services:
+  openHAB:
+    image: openhab/openhab:latest
+    container_name: openhab
+    ports:
+      - "127.0.0.1:9000:8080"
